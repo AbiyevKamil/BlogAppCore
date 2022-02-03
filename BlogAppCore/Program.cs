@@ -1,6 +1,7 @@
 using BlogAppCore.Data;
 using BlogAppCore.Data.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
 });
-builder.Services.AddIdentity<AppUser, AppRole>(options =>
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -30,7 +31,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.ExpireTimeSpan = TimeSpan.FromDays(72);
         options.SlidingExpiration = true;
-        options.Cookie.HttpOnly = true; 
+        options.Cookie.HttpOnly = true;
         options.LoginPath = "/users/auth/login";
         options.LogoutPath = "/users/auth/logout";
         options.AccessDeniedPath = "/";

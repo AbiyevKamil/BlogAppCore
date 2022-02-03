@@ -13,6 +13,7 @@ namespace BlogAppCore.Data.Entities
         [Required]
         public DateTime PublishedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public bool IsDeleted { get; set; }
 
         [NotMapped]
         public IFormFile Banner { get; set; }
