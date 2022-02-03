@@ -6,7 +6,7 @@ namespace BlogAppCore.Core.IRepositories
 {
     public interface IUserRepository : IGenericRepository<AppUser>
     {
-        public Task<IdentityResult> CreateAsync(AppUser user);
+        public Task<IdentityResult> CreateAsync(AppUser user, string password);
         public Task<AppUser> FindByClaimsAsync(ClaimsPrincipal claims);
 
     }

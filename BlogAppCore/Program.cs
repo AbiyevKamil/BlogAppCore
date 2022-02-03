@@ -1,3 +1,4 @@
+using BlogAppCore.Core.IConfigurations;
 using BlogAppCore.Data;
 using BlogAppCore.Data.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -36,9 +37,17 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/users/auth/logout";
         options.AccessDeniedPath = "/";
     });
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
+
+
+//using (var scope = app.Services.CreateScope())
+//{
+//var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
+//await SeedDatabase.Seed(unitOfWork);
+//}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

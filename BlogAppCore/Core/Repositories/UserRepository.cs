@@ -15,9 +15,9 @@ namespace BlogAppCore.Core.Repositories
             _userManager = userManager;
         }
 
-        public virtual async Task<IdentityResult> CreateAsync(AppUser user)
+        public virtual async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
-            return await _userManager.CreateAsync(user);
+            return await _userManager.CreateAsync(user, password);
         }
 
         public virtual async Task<AppUser> FindByClaimsAsync(ClaimsPrincipal claims)
