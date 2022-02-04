@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlogAppCore.Data.Entities
 {
@@ -7,12 +8,13 @@ namespace BlogAppCore.Data.Entities
     {
         public long Id { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
         [Required]
         public DateTime PublishedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        [AllowNull]
+        public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }
 
         [NotMapped]

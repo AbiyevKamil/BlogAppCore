@@ -7,7 +7,7 @@ namespace BlogAppCore.Data.Entities
     public class AppUser : IdentityUser
     {
         [Required]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
         [Required]
         public DateTime RegisteredAt { get; set; }
 

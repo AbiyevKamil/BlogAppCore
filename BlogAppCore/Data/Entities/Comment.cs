@@ -6,7 +6,7 @@ namespace BlogAppCore.Data.Entities
     {
         public long Id { get; set; }
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
         [Required]
         public DateTime AddedAt { get; set; }
 

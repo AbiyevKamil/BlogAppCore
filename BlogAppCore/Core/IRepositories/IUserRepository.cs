@@ -8,6 +8,7 @@ namespace BlogAppCore.Core.IRepositories
     {
         public Task<IdentityResult> CreateAsync(AppUser user, string password);
         public Task<AppUser> FindByClaimsAsync(ClaimsPrincipal claims);
+        public Task<AppUser> FindByEmailAsync(string email);
 
     }
 }

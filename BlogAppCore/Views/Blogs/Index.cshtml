@@ -1,0 +1,73 @@
+﻿@model BlogsIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AuthenticatedLayout";
+    var param = ViewContext.RouteData.Values["Id"];
+    int id = int.MaxValue;
+    if (param != null)
+    {
+        id = Convert.ToInt32(param.ToString());
+    }
+}
+<div class="row">
+    <div class="col-9 row row-cols-6">
+        @if (Model.Blogs.Any())
+        {
+            foreach (var blog in Model.Blogs)
+            {
+                // Post
+                <div class="post-container">
+                    <div class="post post-light"><a class="post-media" asp-controller="Blogs" asp-action="GetBlog" asp-route-id="@blog.Id"><img class="post-img" src="https://ld-wt73.template-help.com/tf/around/images/image-01-332x213.jpg" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-title h5"><a asp-controller="Blogs" asp-action="GetBlog" asp-route-id="@blog.Id">@blog.Title</a></div>
+                            <div class="post-meta">
+                                <div class="post-date">@blog.PublishedAt.ToString("MMMM dd, yyyy")</div>
+                            </div>
+                            <div class="post-tag tag tag-secondary">@blog.Category.Name</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert-warning p-4 col-12 h-50">
+                <h4>
+                    No blogs found.
+                </h4>
+            </div>
+        }
+        </div>
+    <div class="col-3">
+        <div class="list-group">
+            @if (id == int.MaxValue)
+            {
+                <a asp-action="Index" asp-controller="Blogs" asp-route-id="" class="list-group-item list-group-item-action list-group-item-success">
+                    All
+                </a>
+            }
+            else
+            {
+                <a asp-action="Index" asp-controller="Blogs" asp-route-id="" class="list-group-item list-group-item-action">
+                    All
+                </a>
+            }
+            @foreach (var category in Model.Categories)
+            {
+                if (id == category.Id)
+                {
+                    <a asp-action="Index" asp-controller="Blogs" asp-route-id="@category.Id" class="list-group-item list-group-item-action list-group-item-success">
+                        @category.Name
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-controller="Blogs" asp-route-id="@category.Id" class="list-group-item list-group-item-action">
+                        @category.Name
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

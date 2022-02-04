@@ -24,5 +24,10 @@ namespace BlogAppCore.Core.Repositories
         {
             return await _userManager.GetUserAsync(claims);
         }
+
+        public virtual async Task<AppUser> FindByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
     }
 }
