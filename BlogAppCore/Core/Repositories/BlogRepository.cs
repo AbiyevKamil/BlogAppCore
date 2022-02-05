@@ -11,6 +11,11 @@ namespace BlogAppCore.Core.Repositories
         {
         }
 
+        public override async Task<Blog> GetByIdAsync(long id)
+        {
+            return await _context.Blogs.Include(i => i.Comments).Include(i => i.Category).Include(i => i.AppUser).FirstOrDefaultAsync(i => i.Id == id && !i.IsDeleted);
+        }
+
         public virtual async Task<IEnumerable<Blog>> GetByCategoryIdAsync(long id)
         {
             return await dbSet.Include(i => i.Category).Include(i => i.AppUser).Where(i =>

@@ -18,9 +18,12 @@
             {
                 // Post
                 <div class="post-container">
-                    <div class="post post-light"><a class="post-media" asp-controller="Blogs" asp-action="GetBlog" asp-route-id="@blog.Id"><img class="post-img" src="https://ld-wt73.template-help.com/tf/around/images/image-01-332x213.jpg" alt=""></a>
+                    <div class="post post-light">
+                        <a class="post-media" asp-controller="Blogs" asp-action="Blog" asp-route-id="@blog.Id"><img class="post-img" src="https://ld-wt73.template-help.com/tf/around/images/image-01-332x213.jpg" alt=""></a>
                         <div class="post-body">
-                            <div class="post-title h5"><a asp-controller="Blogs" asp-action="GetBlog" asp-route-id="@blog.Id">@blog.Title</a></div>
+                            <div class="post-title h5">
+                                <a asp-controller="Blogs" asp-action="Blog" asp-route-id="@blog.Id">@blog.Title</a>
+                            </div>
                             <div class="post-meta">
                                 <div class="post-date">@blog.PublishedAt.ToString("MMMM dd, yyyy")</div>
                             </div>

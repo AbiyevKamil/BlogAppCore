@@ -19,7 +19,7 @@ namespace BlogAppCore.Core.Repositories
             dbSet = _context.Set<T>();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(long id)
         {
             return await dbSet.FindAsync(id);
         }
