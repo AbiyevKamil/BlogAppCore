@@ -27,17 +27,17 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<BlogDbContext>();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.ExpireTimeSpan = TimeSpan.FromDays(72);
-        options.SlidingExpiration = true;
-        options.Cookie.HttpOnly = true;
-        options.LoginPath = "/auth/login";
-        options.LogoutPath = "/auth/logout";
-        options.AccessDeniedPath = "/";
-    });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromDays(72);
+    options.SlidingExpiration = true;
+    options.Cookie.HttpOnly = true;
+    options.LoginPath = new PathString("/auth/login");
+    options.LogoutPath = new PathString("/auth/logout");
+    options.AccessDeniedPath = "/";
+});
 
 var app = builder.Build();
 

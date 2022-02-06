@@ -62,7 +62,7 @@ namespace BlogAppCore.Core.Repositories
             }
         }
 
-        public virtual async Task<bool> DeleteByIdAsync(int id)
+        public virtual async Task<bool> DeleteByIdAsync(long id)
         {
             try
             {

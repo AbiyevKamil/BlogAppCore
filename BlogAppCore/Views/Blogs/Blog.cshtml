@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-3">
             <div class="person">
-                <img class="person-img" src="https://ld-wt73.template-help.com/tf/around/images/person-03-43x43.jpg" alt="" width="43" height="43">
+                <img class="person-img" src="~/images/@(Model.AppUser.ImagePath==null ? "default-profile.png" : Model.AppUser.ImagePath)" alt="" width="43" height="43">
                 <div class="person-body">
                     <div class="person-title h6"><span>by </span><span class="text-primary">@Model.AppUser.FullName</span></div>
                 </div>
@@ -23,7 +23,7 @@
                 <p class="text-sm">Published at @Model.PublishedAt.ToString("MMMM dd, yyyy")</p>
                 @if (Model.UpdatedAt != null)
                 {
-                    <p class="text-sm">Updated at @Model.UpdatedAt?.ToString("MMMM dd, yyyy")</p>
+                        <p class="text-sm">Updated at @Model.UpdatedAt?.ToString("MMMM dd, yyyy")</p>
                 }
             </div>
         </div>
@@ -35,41 +35,45 @@
             </p>
             <div class="comments-container">
                 <hr/>
-                <form asp-controller="Blogs" asp-action="AddComment" class="row">
-                    <div class="form-group">
-                        <input type="hidden" value="@Model.Id" name="blogId"/>
-                        <label for="commentText">Write your comment</label>
-                        <textarea class="form-control mt-1" required="on" name="commentText" id="commentText" rows="3"></textarea>
-                    </div>
-                    <div class="mt-2 d-flex align-items-center justify-content-center">
-                        <button class="btn btn-sm btn-dark" type="submit">Submit</button>
-                    </div>
-                </form>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Blogs" asp-action="AddComment" class="row">
+                        <div class="form-group">
+                            <input type="hidden" value="@Model.Id" name="blogId"/>
+                            <label for="commentText">Write your comment</label>
+                            <textarea class="form-control mt-1" required="on" name="commentText" id="commentText" rows="3"></textarea>
+                        </div>
+                        <div class="mt-2 d-flex align-items-center justify-content-center">
+                            <button class="btn btn-sm btn-dark" type="submit">Submit</button>
+                        </div>
+                    </form>
+                }
                 @if (Model.Comments.Any())
                 {
                     foreach (var comment in Model.Comments)
                     {
-                        <div class="comment">
-                            <div class="comment-header">
-                                <!-- Person-->
-                                <div class="person person-small"><img class="person-img" src="https://ld-wt73.template-help.com/tf/around/images/person-03-43x43.jpg" alt="" width="43" height="43">
+                                <div class="comment">
+                                    <div class="comment-header">
+                                        <!-- Person-->
+                                <div class="person person-small">
+                                    <img class="person-img" src="~/images/@(Model.AppUser.ImagePath==null ? "default-profile.png" : Model.AppUser.ImagePath)" alt="" width="43" height="43">
                                     <div class="person-body">
-                                        <div class="person-title h5">
-                                            <p>@comment.AppUser.FullName</p>
+                                                <div class="person-title h5">
+                                                    <p>@comment.AppUser.FullName</p>
+                                                </div>
+                                                <div class="person-meta">@comment.AddedAt.ToString("f")</div>
+                                            </div>
                                         </div>
-                                        <div class="person-meta">@comment.AddedAt.ToString("f")</div>
                                     </div>
+                                    <div class="comment-text mt-3">@comment.Content</div>
                                 </div>
-                            </div>
-                            <div class="comment-text mt-3">@comment.Content</div>
-                        </div>
                     }
                 }
                 else
                 {
-                    <p class="alert-info p-3 mt-3">
-                        There is no comment currently.
-                    </p>
+                        <p class="alert-info p-3 mt-3">
+                            There is no comment currently.
+                        </p>
                 }
             </div>
         </div>

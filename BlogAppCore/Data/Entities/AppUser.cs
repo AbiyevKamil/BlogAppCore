@@ -10,9 +10,7 @@ namespace BlogAppCore.Data.Entities
         public string FullName { get; set; } = string.Empty;
         [Required]
         public DateTime RegisteredAt { get; set; }
-
-        [NotMapped]
-        public IFormFile ProfilePicture { get; set; }
+        public string? ImagePath { get; set; }
 
 
         // Foreign keys

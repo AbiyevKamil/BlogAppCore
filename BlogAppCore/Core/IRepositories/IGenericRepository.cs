@@ -6,7 +6,7 @@
         public Task<IEnumerable<T>> GetAllAsync();
         public Task<bool> AddAsync(T entity);
         public Task<bool> UpdateAsync(T entity);
-        public Task<bool> DeleteByIdAsync(int id);
+        public Task<bool> DeleteByIdAsync(long id);
 
     }
 }
