@@ -16,9 +16,7 @@ namespace BlogAppCore.Data.Entities
         [AllowNull]
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }
-
-        [NotMapped]
-        public IFormFile Banner { get; set; }
+        public string ImageName { get; set; }
 
 
         // Foreign keys

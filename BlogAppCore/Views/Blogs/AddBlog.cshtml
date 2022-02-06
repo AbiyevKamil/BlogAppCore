@@ -4,7 +4,47 @@
 }
 
 
-<form>
-    <input asp-for="Title"/>
-</form>
+
+<div>
+    <h3 class="text-center">New Blog</h3>
+    <form asp-action="addblog" asp-controller="blogs" method="post" enctype="multipart/form-data">
+        @if (ViewData["Error"] != null)
+        {
+                    <div asp-validation-summary="All" class="alert-danger text-danger p-4">
+                    </div>
+        }
+        <div class="form-group">
+            <label asp-for="Title">Title</label>
+            <input class="form-control" asp-for="Title" placeholder="Enter title">
+            <span asp-validation-for="Title" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content">Content</label>
+            <textarea class="form-control" asp-for="Content" placeholder="Enter content"></textarea>
+            <span asp-validation-for="Content" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CategoryId">Category</label>
+            <select class="form-control" asp-for="CategoryId" placeholder="Enter content">
+                @foreach (var category in ViewBag.categories)
+                {
+                        <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Banner">Select banner image</label>
+            <input type="file" class="form-control-file"  accept="image/*" asp-for="Banner">
+        </div>
+
+        <div class="mt-3 w-100 d-flex align-items-center justify-content-center">
+            <button type="submit" class="btn btn-dark">Publish</button>
+        </div>
+    </form>
+</div>
+
+
+
+
 

@@ -11,11 +11,10 @@ namespace BlogAppCore.Models
         [Required]
         public string Content { get; set; }
         [Required]
-        //[NotMapped]
-        //public IFormFile Banner { get; set; }
-
+        public IFormFile Banner { get; set; }
 
         // Foreign keys
+        [Required]
         public long CategoryId { get; set; }
     }
 }
